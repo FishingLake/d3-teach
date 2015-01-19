@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">		
+		<title>Introduction to D3.js</title>		
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="./css/uncc1.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="./css/zenburn.css">
+		<!--[if lt IE 9]>
+		<script src="./js/html5shiv.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="./js/d3.v3.js"></script>
+	</head>
+	
+	<body>		
+		<div class="reveal">
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section id="intro">
+					<h2>Introduction to D3.js</h2>
+					<span>The name "D3" refers to the W3C Document Object Model.</span>
+					<span  class="blue">  Today's slides is on Moodle2.uncc.edu</span>
+					<img src="img/main.png"/>						
+					<div style="float: center">Presented by  Chong Zhang 01/27/2014</div>
+				</section>
+				
+				<section id="outline">
+					<h2>Outline</h2>       
+					<ul>
+					<li>Wh-Questions</li>
+					<div style="width:100%; height:10px;"></div>
+					<li>Fundamentals</li>
+					<div style="width:100%; height:10px;"></div>
+					<li>Execution Squence of a Web Page</li>
+					<div style="width:100%; height:10px;"></div>
+					<li>Setup</li>
+					<div style="width:100%; height:10px;"></div>					
+					<li>Selections</li>
+					<div style="width:100%; height:10px;"></div>
+					<li>Binding data</li>					
+					<div style="width:100%; height:10px;"></div>
+					<li>Loading your data</li>
+					<div style="width:100%; height:10px;"></div>
+					<li>Scales</li>
+					<div style="width:100%; height:10px;"></div>
+					<li>Limitations</li>
+					<div style="width:100%; height:10px;"></div>					
+					<li>Making a bar chart</li>
+					<div style="width:100%; height:10px;"></div>	
+					</ul>						
+				</section>
+
+                <section id="wh">
+                    <h2>Wh-Questions</h2>
+                    <ul>
+					<li class="blue">What is D3.js
+						<ul><li class="headlv2"><i>D3.js is a JavaScript library for manipulating documents based on data.</i> (src: d3js.org)></li></ul>
+					</li>					
+					<li class="blue"> Why use D3.js
+						<ul>
+						<li class="headlv2">Let you manipulate the HTML elements with data.</li>
+						<li class="headlv2">Web Standards: style with CSS and interact with JavaScript event.</li>
+						<li class="headlv2">Fast, simple, efficient, and fantastic.</li>
+						<li class="headlv2">Well-developed APIs, documents, and examples.</li>
+						</ul>
+					</li>
+					<li class="blue"> When you should use D3.js
+						<ul><li class="headlv2">You can use D3.js when your <strong><font color="red">webpage</font></strong> is interacting with data.</li></ul>
+					</li>
+					<li class="blue"> Where is D3.js used
+						<ul><li class="headlv2">D3.js is a JavaScript library. The part of your <strong><font color="red">web application</font></strong> the users interact with (the frontend) will use D3.js. Your backend (the server) will generate the necessary data.</li></ul>
+					</li>      
+					</ul>
+                </section>
+
+                <section id="fund">
+                    <h2>Fundamentals</h2>					
+					<section>
+						<ul>
+								
+							<div style="width:70%">	
+								<li class="blue" >HTML</li>						
+								<ul >
+									<li class="fragment headlv2">Hypertext Markup Language is used to display web pages.</li>
+								</ul>
+							</div>
+							<div class="fragment" style="width:29%;float:right; margin-top:-140px">
+								<pre><code class="xml">&lt;html&gt;<br/> &lt;head&gt;<br/>  &lt;title&gt;<br/>   Page Title<br/>  &lt;/title&gt;<br/> &lt;/head&gt;<br/> &lt;body&gt;<br/>   Hello World!<br/> &lt;/body&gt;<br/>&lt;/html&gt;</code></pre>
+							</div>
+							<div>
+								<li class="blue">CSS</li>
+								<ul><li class="fragment headlv2" style="width:70%;">Cascading Style Sheets (CSS) are used to describe the visual presentation of HTML pages. </li></ul>
+								<!--<div class="fragment" style="width:29%;display:inline-block;float:right">
+								<pre><code class="css">#world {<br/>color: Red;<br/>}</code></pre>
+								</div>-->
+								<ul><li class="fragment headlv2">CSS has selectors which are used to select element(s) you want to style. Typical selectors are like this: <small><i>(For more info refer to http://www.w3schools.com/cssref/css_selectors.asp)</i></small></li></ul>
+						
+							</div>
+							<div class="fragment" style="width:100%;display:inline-block;float:left">
+								<pre><code class="css"><i>element</i> (e.g., p)       /* Selects all &lt;p&gt; elements */ <br/><i>.class</i> (e.g., .caption) /* Selects all elements with class = "caption" */ <br/><i>#id</i> (e.g., #subnav)     /* Selects the element with ID = "subnav" */</code></pre>
+							</div>					
+							<div style="width:70%;float:left">	
+								<li class="blue">JavaScript</li>
+								<ul><li class="fragment headlv2">JavaScript is a dynamic scripting language that can give functionality to webpages before, during and after they load.</li></ul>
+							</div>
+							<div class="fragment" style="width:30%;display:inline-block;float:right">
+								<pre><code class="xml">&lt;head&gt;<br/> &lt;title&gt;Page Title&lt;/title&gt;<br/> &lt;script type="text/javascript"&gt;<br/> alert("Hello World!")<br/>&lt;/script&gt;<br/> &lt;/head&gt;</code></pre>
+							</div>	
+						</ul>
+					</section>
+
+					<section>
+						<ul>
+						<div style="width:80%;float:left">
+							<li class="blue">SVG</li>
+							<ul>
+							<li  class="headlv2"><i>SVG is a XML-based vector image format for 2D graphics that has support for interactivity and animation. </i>(src: wikipedia). The specification is an open standard developed by the W3C since 1999. HTML5 has support for SVG. </li>
+							<li class="headlv2">SVG has a number of built-in simple shapes: Rectangle, Circle, Ellipse, Straight Line, Polyline, and Polygon.</li>
+							<li class="headlv2">To use SVG, html documents must include a base svg element</li>
+                        	<li class="headlv2">Element declaration order determines depth</li>
+							</ul>	
+							<pre class="fragment"><code class="xml"><span class="tag">&lt;<span class="title">svg</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">height</span>=<span class="value">"100"</span> <span class="attribute">style</span>=<span class="value">"box-shadow: 0px 0px 0px"</span>&gt;</span><br/>&nbsp;&nbsp;<span class="fragment"><span class="tag">&lt;<span class="title">circle</span> <span class="attribute">cx</span>=<span class="value">"25"</span> <span class="attribute">y</span>=<span class="value">"25"</span> <span class="attribute">r</span>=<span class="value">"22"</span> <span class="attribute">fill</span>=<span class="value">"blue"</span> /&gt;</span></span><br/>&nbsp;&nbsp;<span class="fragment"><span class="tag">&lt;<span class="title">circle</span> <span class="attribute">cx</span>=<span class="value">"50"</span> <span class="attribute">y</span>=<span class="value">"50"</span> <span class="attribute">r</span>=<span class="value">"10"</span> <span class="attribute">fill</span>=<span class="value">"red"</span> /&gt;</span></span><br/><span class="tag">&lt;/<span class="title">svg</span>&gt;</span></code></pre>						
+						</div>
+						
+						<div style="width:20%; height: 0px;display:block;float:right; margin-top: 360px;">
+							<pre class="fragment" style="box-shadow: 0px 0px 0px">	
+								<svg width="100" height="100" style=" border: 1px solid; ">
+									<circle cx="25" cy="25" r="22"	fill="blue"/>
+									<circle cx="50" cy="50" r="10"	fill="red"/>
+								</svg>
+							</pre>					
+						</div>
+						<div class="fragment" style="float: left">
+							<li class="blue">Developer Tools</li>
+							<ul><li  class="headlv2">Texteditor for writting HTML/CSS/JavaScript. (e.g., Notepad++, TextPad, Sublime)</li>
+								<li  class="headlv2">Google Chrome browser is recommended for debugging.</li>
+							</ul>
+						</div>
+						</ul>			
+						   
+					</section>
+				</section>
+
+				 <section id="seq">
+                    <h2>Execution Sequence of a Web Page</h2>
+                    <ul>
+					<li class="blue">From top to bottom line by line
+						<ul><li class="headlv2">HTML pages are interpreted on the fly and parsed from top to bottom. </li>
+						<li class="headlv2"> The first elements will load first, the last last.</li></ul>
+					</li>					
+					<li class="fragment blue"> When a HTML document gets downloaded
+						<ul>						
+						<li class="headlv2">HTML parser starts working and register elements in the DOM namespace, together with all the attributes</li>
+						<li class="headlv2">Bind JavaScript events</li>
+						<li class="headlv2">Render using CSS </li>
+						
+						</ul>
+					</li>
+					<li class="fragment blue"> Recommendation
+						<ul>
+							<li class="headlv2">External CSS and JavaScript files</li>
+							<li class="headlv2">Include CSS before JavaScript (Browsers will block rendering of all elements that are below the script tag. The elements will not be rendered until all scripts are downloaded.)</li>
+						</ul>
+					</li>					     
+					</ul>
+                </section>
+						
+                <section id="setup">
+                    <h2>Setup</h2>
+					<section>
+						<ul>								
+						<li class="blue">D3 allows you to visualize external data files (e.g. cars.csv) stored in a web server.
+							<ul> 										
+							<li class="headlv2">If you already have a Web Server such as Apache Tomcat, Mongoose, lighthttpd or have already installed Python, go Download D3.js</li>
+							<li class="headlv2 ">Install Python (2.7.5 for example). The link is: <i><font color="red">http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi</font></i></li>
+							<li class="headlv2 ">Set system enviroment variable. Assuming that your Python installation is in C:\Python27\, add this to your PATH:<i><font color="red"> C:\Python27\;C:\Python27\Scripts\</font></i></li>
+							<li class="headlv2 ">Open the command prompt, change directory to your current working folder, for example .../.../test and enter <i><font color="red">"python -m SimpleHTTPServer 1234"</font></i></li>
+							</ul>	
+						</li>
+						<div style="width:100%; height:10px;"></div>
+						<li class="blue">Download D3.js 					
+							<ul>
+							<li class="headlv2">Link: <i><font color="red">https://github.com/mbostock/d3/releases/download/v3.4.1/d3.v3.zip</font></i></li>
+							<li class="headlv2">Decompress the ZIP file to the working folder </li>
+							</ul>
+						</li>						
+						</ul>
+					</section>	
+					<section>
+						<ul>
+						<div style="width:60%;float:left">
+							<li class="blue">Reference D3.js
+								<ul>
+								<li class="headlv2">Create a simple HTML page within your working folder named <i>refD3.html</i></li>
+								<li class="headlv2">Paste the right code into your HTML file, so it references D3.js in the head tag and provides room for your own JavaScript code.</li>
+								</ul>
+							</li>
+						</div>
+						<div style="width:40%;display:inline-block;float:right">
+							<pre><code class="xml">&lt;!DOCTYPE html&gt;<br/>&lt;html&gt;<br/> &lt;head&gt;<br/>  &lt;meta charset="utf-8"/&gt;<br/>   &lt;title&gt;<br/>    D3 Test<br/>   &lt;/title&gt;<br/> &lt;script type="text/javascript"&gt; src="./js/d3.v3.js"&gt;&lt;/script&gt;<br/>&lt;/head&gt;<br/>&lt;body&gt;<br/> Your beautiful D3 code will go here.<br/>&lt;/body&gt;<br/>&lt;/html&gt;</code></pre>
+						</div>
+						<div style="width:80%;float:left">
+						<li class="blue">View your page
+							<ul>
+							<li class="headlv2">In some cases, you can just click the the webpage to open it in a web browser.</li>	
+							<li class="headlv2">However, when loading external data sources, you have to run a local Web Server and view your page, e.g., <i>http://localhost:1234/refD3.html</i></li>						
+							</ul>
+						</li>
+						</div>		
+						<div style="width:80%;float:left">
+							<li class="fragment">
+								<a href="refD3.html" target="_blank" class="roll"><span>See refD3.html</span></a>						
+						</li>
+						</div>	
+						</ul>
+					</section>
+				</section>
+				
+				<section id="selection">
+					<h2>Selections</h2>	
+                    <section>									
+                     <ul>
+					 <li class="blue">Core concepts
+						<ul>
+						<li class="headlv2">
+							A selection is an array of elements pulled from the current document.
+						</li>
+						<li class="headlv2">
+							D3 uses CSS to select specific elements and provides a shorthand way.
+						</li>
+						<li class="headlv2">
+							Selectors can change the style/attribute of the selected elements with style()/attr() function.
+						</li>						
+						</ul>
+					 </li>					
+						<pre><code class="javascript"><br/>.attr(name[, value])<br/>.style(name[, value[, priority]])<br/>.html([value])<br/>.text([value])<br/><span class="attribute">[value]</span> can be constant or a function
+						</code></pre>											
+					</ul>						
+					</section>
+			        
+					<section>
+                   		<ul>
+                   			<li class="blue">
+								Method chaining allows shorter and more readable code.
+								<ul>
+									<li class="headlv2">.text() and .style() example
+										<div style="width:50%">
+											<span class="singleLabel">Original text</span>
+											<pre><codex>&lt;span class="singleLabel">Original text&lt;/span&gt;</codex></pre>
+										</div>
+										<div >
+											<pre><code class="js"><br/>d3.select(".singleLabel")<br/> .text('Altered text')<br/> .style("color", "#FF0000");
+											</code></pre>
+										</div>
+									</li>
+									<div style="float: right">
+											<a style="background-color: #0044cc; font-size: 14px;" onclick="d3.select('.singleLabel').text('Altered text').style('color', '#FF0000');">Execute</a>
+									</div>
+                   					<li class="headlv2">.attr(name, {constant})  
+                   						<pre><code class="javascript"><br/>d3.<span class="keyword">select</span>( <span class="string">".singleLabel"</span> )<br/>&nbsp;&nbsp;.attr( <span class="string">"class"</span>, <span class="string">"my_class"</span> )
+                   						</code></pre>
+                    		 		</li> 
+									<li class="headlv2">.attr(name, {function})
+										<pre><code class="javascript"><br/>d3.<span class="keyword">selectAll</span>( <span class="string">".singleLabel"</span> )<br/>&nbsp;&nbsp;.attr( <span class="string">"class"</span>, <span class="function"><span class="keyword">function</span><span class="params">( d, i )</span> {</span><br/>&nbsp;&nbsp;<span class="comment">// d is datum being rendered</span><br/>&nbsp;&nbsp;<span class="comment">// i is datum's index in dataset</span><br/>&nbsp;&nbsp;<span class="comment">// return value based on logic</span><br/>})
+                    					</code></pre>
+                    				</li>
+								</ul>
+							</li>
+						</ul>
+                	</section>
+				</section>
+				
+				<section id="binding" >
+					<h2>Binding data</h2>
+					<section>
+						<ul>
+						<li class="blue">What is binding and why would I do it
+						<ul>					
+						<li class="headlv2 ">Binding is like "attaching" or associating data to specific HTML elements, so that later you can reference those data values to apply visualization mapping rules.</li>						
+						</ul>						
+						</li>
+						<li class="blue">Type of data
+						<ul>
+						<li class="headlv2">Data can be numbers.</li>
+						<pre><code class="javascript">var data = [1, 1, 2, 3, 5, 8];</code></pre>
+						<li class="headlv2">	Can be objects.</li>
+						<pre><code class="javascript">var data = [<br/>&nbsp;&nbsp;{x: 10.0, y: 9.14},<br/>&nbsp;&nbsp;{x:  8.0, y: 8.14},<br/>&nbsp;&nbsp;{x: 13.0, y: 8.74},<br/>&nbsp;&nbsp;{x:  9.0, y: 8.77},<br/>&nbsp;&nbsp;{x: 11.0, y: 9.26}<br/>&nbsp;&nbsp;];</code></pre>
+						</ul>
+						</li>
+						<li class="blue">How
+						<ul>
+						<li class="headlv2 ">Use <i><font color="red">selection.data()</font></i> to bind data directly to the document.</li>
+						<li class="headlv2 ">Selection. <i><font color="red">append()</font></i> creates new elements, append, and select.</li>												
+						</ul>						
+						</li>	
+						<li class="blue">In a way of method chaining! Everything beyond <i><font color="red">data()</font></i> in a chain is executed for each point.</li>						
+						</ul>
+					</section>
+					<section>
+						<ul>
+						<li class="blue">Enter()
+						<ul>
+						<li class="headlv2">enter: Initialize elements, for which there are no existing elements. It is generally followed by <i><font color="red">append()</font></i></li>						
+						</ul>
+						</li>						
+						<pre><code>var w=600, h=400;<br/>var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18];<br/>var mysvg = d3.select("body").<font color="red">append("svg")</font><br/>&nbsp;&nbsp;.<font color="red">attr</font>("width", w).<font color="red">attr</font>("height", h);<br/><br/>mysvg.selectAll("rect").<font color="red">data</font>(dataset)<br/>&nbsp;&nbsp;.<font color="red">enter()</font>.<font color="red">append("rect")</font><br/>&nbsp;&nbsp;.<font color="red">attr</font>("x", function(d, i) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return i * (w / dataset.length);<br/>&nbsp;&nbsp;})<br/>&nbsp;&nbsp;.<font color="red">attr</font>("y", function(d) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return h - (d * 4);<br/>&nbsp;&nbsp;})<br/>&nbsp;&nbsp;.<font color="red">attr</font>("width", w / dataset.length)<br/>&nbsp;&nbsp;.<font color="red">attr</font>("height", function(d) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return d * 4;<br/>&nbsp;&nbsp;})<br/>&nbsp;&nbsp;.<font color="red">attr</font>("fill", function(d) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return "rgb(0, 0, " + (d * 10) + ")";<br/>&nbsp;&nbsp;});</code></pre>										
+						</ul>
+					</section>				
+                </section>
+				
+				<section id="localdata">
+					<h2>Loading your data</h2>
+					<section>
+                    	<ul>
+						<li class="blue">D3 provides several convenience routines using XMLHttpRequest.
+							<ul>
+							<li class="headlv2">CSV
+								<pre><code class="javascript">symbol,date,price<br/>S&P 500,Jan 2000,1394.46<br/>S&P 500,Feb 2000,1366.42<br/>S&P 500,Mar 2000,1498.58<br/>S&P 500,Apr 2000,1452.43<br/>S&P 500,May 2000,1420.6<br/>S&P 500,Jun 2000,1454.6<br/>S&P 500,Jul 2000,1430.83</code></pre>
+							</li>
+							<li class="headlv2">CSV is untyped, so coercion from strings is required.
+							<pre><code class="javascript">var format = d3.time.format("%b %Y");<br/><font color="red">d3.csv</font>("stocks.csv", function(stocks) {<br/>&nbsp;&nbsp;stocks.forEach(function(d) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;d.price = +d.price;<br/>&nbsp;&nbsp;&nbsp;&nbsp;d.date = format.parse(d.date);<br/>&nbsp;&nbsp;&nbsp;});<br/>});</code></pre>
+							</li>
+							</ul>
+						</li>
+						</ul>
+					</section>
+					<section>
+						<ul>
+						<li class="headlv2">JSON: JavaScript Object Notation
+							<small><i>(Refer to http://www.json.org/ for more infomation.)</i></small>
+							<pre><code class="javascript">[{"symbol": "S&P 500", "date": "Jan 2000", "price": 1394.46},<br/>&nbsp;{"symbol": "S&P 500", "date": "Feb 2000", "price": 1366.42},<br/>&nbsp;{"symbol": "S&P 500", "date": "Mar 2000", "price": 1498.58},<br/>&nbsp;{"symbol": "S&P 500", "date": "Apr 2000", "price": 1452.43},<br/>&nbsp;{"symbol": "S&P 500", "date": "May 2000", "price": 1420.6}...</code></pre>
+						</li>
+						<li class="headlv2">JSON is typed, but you must still parse dates.
+						<pre><code>var format = d3.time.format("%b %Y");<br/><br/><font color="red">d3.json</font>("stocks.json", function(stocks) {<br/>&nbsp;&nbsp;&nbsp;stocks.forEach(function(d) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d.date = format.parse(d.date);<br/>&nbsp;&nbsp;&nbsp});<br/>})</code></pre>
+						</li>
+						</ul>
+               		</section>
+				</section>
+				
+				<section id="scale">
+					<h2>Scales</h2>
+					<ul>
+                        <li class="blue">Scales are functions that map from data-space to visual-space</li>
+							<img src="./img/scales.png"><small><a href="http://www.jeromecukier.net/blog/2011/08/11/d3-scales-and-color/" class="roll">Source: Jerome Cukier's</a></small></img>
+										
+						<li class="blue">Quantitative Scales (linear, power, log, quantize, quantile, etc.)
+							<ul><li  class="headlv2">Map a continuous (numeric) domain to a continuous range</li></ul>
+						</li>
+						<pre><code class="javascript">var x = d3.scale.linear()<br/>&nbsp;&nbsp;&nbsp;&nbsp;.domain([20, 80])<br/>&nbsp;&nbsp;&nbsp;&nbsp;.range([0, 120]);<br/><br/>x(50); // 60</code></pre>
+						<li class="blue">Ordinal Scales (e.g., categorical colors)
+						<ul><li class="headlv2">Map a discrete domain to a discrete range.</li></ul>
+						</li>
+						<pre><code class="javascript">var x = d3.scale.ordinal()<br/>&nbsp;&nbsp;&nbsp;&nbsp;.domain(["A", "B", "C", "D"])<br/>&nbsp;&nbsp;&nbsp;&nbsp;.range([0, 10, 20, 30]);<br/><br/>x("B"); // 10</code></pre>
+					</ul>
+			    </section>	
+												
+				<section id="lim">
+					<h2>Limitations</h2>       
+					<ul>
+						<div style="width:100%; height:20px;"></div>
+						<li>SVG means IE8 and below is out</li>
+						<div style="width:100%; height:20px;"></div>						
+						<li>DOM rendering can be slow with many elements: if you need to draw thousands of points, consider <font color="red">Canvas</font> instead</li>
+						<div style="width:100%; height:20px;"></div>
+						<li>Steep learning curve for simple graphs: but try <a href="http://code.shutterstock.com/rickshaw/" class="roll"><span data-title="Rickshaw.js">Rickshaw.js</span></a>, <a href="http://nvd3.org/" class="roll"><span data-title="NVD3">NVD3</span></a>. Both are built on D3.js</li>
+						<div style="width:100%; height:20px;"></div>					
+						<li>Can't hide underlying data: always visible</li>				
+					</ul>						
+				</section>
+
+				<section id="enough">
+                	<h2>Enough already!</h2>
+                	<h3>Lets build stuff.</h3>
+				</section>
+				
+				<section id="barchart">
+					<section  id="barchart1">
+                        <h2>Basic bar chart</h2>
+						<ul>
+						<li class="blue">Basic JavaScript code
+                        <pre><code class="javascript"><br/><span class="keyword">var</span > dataset = [ <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">25</span> ];<br/><br/><span class="fragment">d3.select( <span class="string">"body"</span> )<br/>&nbsp;&nbsp;.selectAll( <span class="string">"div"</span> )<br/>&nbsp;&nbsp;.data( dataset )<br/>&nbsp;&nbsp;&nbsp;&nbsp;.enter()<br/>&nbsp;&nbsp;&nbsp;&nbsp;.append( <span class="string">"div"</span> )</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="fragment">.attr( <span class="string">"class"</span>, <span class="string">"bar"</span> )</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="fragment">.style( <span class="string">"height"</span>, <span class="function"><span class="keyword">function</span><span class="params">( d )</span> {</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span> barHeight = d * <span class="number">5</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> barHeight + <span class="string">"px"</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;});</span><br/></code></pre>
+						</li>
+						<li class="fragment blue">CSS code to style the initial representation of the bar chart
+                        <pre class="fragment"><code class="css"><br/><span class="class">.bar</span> <span class="rules">{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span>;</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">20</span>px</span>;</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">75</span>px</span>;</span>  <span class="comment">/* Gets overriden by D3-assigned height */</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="rule"><span class="attribute">margin-right</span>:<span class="value"> <span class="number">2</span>px</span>;</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="rule"><span class="attribute">background-color</span>:<span class="value"> teal</span>;</span><br/><span class="rule">}</span></span>
+                        </code></pre>
+						</li>
+						<li class="fragment">
+						<div>
+							<a href="barchart1.html" target="_blank" class="roll"><span>See barchart1.html</span></a>
+						</div>
+						</li>
+						</ul>
+                	</section>
+
+					<section  id="barchart2">
+                    <h2>More interactive, Tooltips!</h2>
+					<ul>
+					<li class="blue"> First, add a tooltip div.
+                    <pre><code class="javascript"><br/>var tooltip = d3.select("body")<br/>&nbsp;&nbsp;&nbsp;&nbsp;.append("div")<br/>&nbsp;&nbsp;&nbsp;&nbsp;.style("position", "absolute")<br/>&nbsp;&nbsp;&nbsp;&nbsp;.style("z-index", "10")<br/>&nbsp;&nbsp;&nbsp;&nbsp;.style("visibility", "hidden")<br/>&nbsp;&nbsp;&nbsp;&nbsp;.style("border", "1px solid")<br/>&nbsp;&nbsp;&nbsp;&nbsp;.text("a simple tooltip");<br/><br/></code></pre>
+					</li>
+					<li class="fragment blue">Then, add mouse listeners.
+					<pre class="fragment"><code class="javascript"><br/>.on("mouseover", function(d){ tooltip.style("visibility", "visible")<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text("I have the data: "+d); })<br/>.on("mousemove", function(d){ tooltip.style("top", (d3.event.pageY-10)+"px")<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.style("left",(d3.event.pageX+10)+"px")<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text("I have the data: "+d);})<br/>.on("mouseout", function(){ tooltip.style("visibility", "hidden");});<br/><br/></code></pre> 
+					</li>
+					<li class="fragment">
+						<div>
+							<a href="barchart2.html" target="_blank" class="roll"><span>See barchart2.html</span></a>
+						</div>
+					</li>
+					</ul>
+                	</section>
+
+					<section  id="barchart3">
+                    	<h2>More? Highlighting!</h2>
+                   	 	<ul>
+                        <li class="blue">First, specify the highlighting style
+						<pre class="fragment"><code class="css"><br/>div.bar.highlight {<br/>&nbsp;&nbsp;border: 2px solid;<br/>&nbsp;&nbsp;border-color: red;<br/>}
+                        </code></pre> 
+						</li>
+						<li class="fragment blue"> Then, set the "class" attributes (toggle the "highlight" ) using <i><font color="red">selection.classed()</font></i> in mouse event listeners.
+						<pre class="fragment"><code class="javascript"><br/>.on("mouseover", function(d){ ... d3.select(this).classed("highlight",true); })<br/>.on("mousemove", function(d){ ... d3.select(this).classed("highlight",true)})<br/>.on("mouseout", function(){ ... d3.select(this).classed("highlight",false);});<br/><br/></code></pre>
+						</li>
+						<li class="fragment">
+						<div>
+							<a href="barchart3.html" target="_blank" class="roll"><span>See barchart3.html</span></a>
+						</div>
+						</li>
+                    	</ul>
+                	</section>
+				</section>
+
+				<section id="paper">
+					<h2>MIKE BOSTOCK'S&nbsp;PAPER</h2>
+					<div>
+						<img src="./img/d3-paper.png">
+					</div>
+					<div>
+						<a href="http://vis.stanford.edu/papers/d3" class="roll"><span>Bostock, Ogievetsky and Heer, IEEE TVCG 2011</span></a>
+					</div>
+				</section>
+			
+				<section id="res">
+                	<h2>Resources</h2>
+                	<ul>	
+					<div style="width:100%; height:40px;"></div>				
+					<li class="headlv2">	<a href="http://d3js.org/">d3js.org</a> Description, Docs, API</li>
+					<div style="width:100%; height:40px;"></div>
+					<li class="headlv2">	<a href="http://christopheviau.com/d3list/gallery.html">http://christopheviau.com/d3list/gallery.html</a> Over 2000 examples and demos</li>
+					<div style="width:100%; height:40px;"></div>
+					<li class="headlv2">	<a href="https://github.com/d3/d3-plugins">github.com/d3/d3-plugins</a> Plugins</li>
+					<div style="width:100%; height:40px;"></div>
+					<li class="headlv2">	<a href="http://stackoverflow.com/questions/tagged/d3.js">stackoverflow.com/questions/tagged/d3.js</a> StackOverflow for help</li>
+					</ul>
+            	</section>
+
+				<section id="end">
+               		<h1 style="padding-top: 200px;">Thank You!</h1>
+               		<h2 style="padding-top: 200px;">Questions?</h2>
+				</section>			
+
+			</div> <!-- END OF SLIDES -->
+
+			<!-- The navigational controls UI -->
+			<aside class="controls" style="display: block;">
+				<a class="left enabled" href="">◄</a>
+				<a class="right enabled" href="">►</a>
+				<a class="up" href="">▲</a>
+				<a class="down" href="">▼</a>
+			</aside>
+
+			<!-- Presentation progress bar -->
+			<div class="progress" style="display: block;"><span></span></div>
+			
+		</div>
+
+		<script type="text/javascript" src="./js/head.min.js"></script>
+		<script type="text/javascript" src="./js/reveal.min.js"></script>
+		<script type="text/javascript" >			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({	
+				controls: true,
+				progress: true,
+				history: true,
+
+				overview: true,
+				loop: false,
+				theme: 'uncc1', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: './js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: './js/classList.js', condition: function() { return !document.body.classList; } }
+				]
+			});
+			
+		</script>
+		<script type="text/javascript" src="./js/highlight.js"></script>
+	</body>
+</html>
